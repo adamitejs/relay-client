@@ -1,7 +1,7 @@
 Relay allows the Adamite client SDK to communicate with Adamite services over a standard WebSocket interface.
 
-[![CircleCI](https://circleci.com/gh/adamitejs/relay.svg?style=svg)](https://circleci.com/gh/adamitejs/relay)
-[![codecov](https://codecov.io/gh/adamitejs/relay/branch/master/graph/badge.svg)](https://codecov.io/gh/adamitejs/relay)
+[![CircleCI](https://circleci.com/gh/adamitejs/relay-client.svg?style=svg)](https://circleci.com/gh/adamitejs/relay-client)
+[![codecov](https://codecov.io/gh/adamitejs/relay-client/branch/master/graph/badge.svg)](https://codecov.io/gh/adamitejs/relay-client)
 
 ---
 
