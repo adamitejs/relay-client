@@ -1,24 +1,30 @@
 import * as io from "socket.io-client";
 import querystring from "querystring";
+import { App, AuthPlugin, AuthUser } from "@adamite/sdk";
+import { RelayClientConfig } from "./RelayTypes";
 
-class AdamiteClient {
-  public app: any;
+class RelayClient {
+  public app: App;
 
-  public config: any;
+  public config: RelayClientConfig;
 
   public socket: any;
 
-  constructor(app: any, config: any) {
+  constructor(app: App, config: RelayClientConfig) {
     this.app = app;
     this.config = config;
     this.socket = io(this.url);
-    this._subscribeToEvents();
+    this.subscribeToEvents();
   }
 
   get url() {
+    const authPlugin = this.app.plugins["auth"] as AuthPlugin;
+    const currentUser = authPlugin && authPlugin.currentUser;
+    const token = currentUser && currentUser.jwt;
+
     const qs = querystring.stringify({
       key: this.app.config.apiKey,
-      token: this.app.plugins.auth && this.app.auth().currentUser && this.app.auth().currentUser.jwt,
+      token,
       ...(this.app.config.queryString || {})
     });
 
@@ -45,9 +51,9 @@ class AdamiteClient {
     });
   }
 
-  _subscribeToEvents() {
+  private subscribeToEvents() {
     if (this.app.plugins.auth) {
-      this.app.auth().onAuthStateChange((authState: any) => {
+      this.app.auth().onAuthStateChange((authState: AuthUser) => {
         this.socket.emit("authStateChange", {
           token: authState ? authState.token : null
         });
@@ -70,4 +76,4 @@ class AdamiteClient {
   }
 }
 
-export default AdamiteClient;
+export default RelayClient;

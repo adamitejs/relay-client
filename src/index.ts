@@ -1,5 +1,5 @@
-import AdamiteClient from "./AdamiteClient";
+import RelayClient from "./RelayClient";
 
 export default function(app: any, config: any) {
-  return new AdamiteClient(app, config);
+  return new RelayClient(app, config);
 }
