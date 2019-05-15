@@ -12,6 +12,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
+    "@adamite/sdk": "https://github.com/adamitejs/sdk.git",
     "querystring": "^0.2.0",
     "socket.io-client": "^2.2.0",
     "uws": "10.148.1"
