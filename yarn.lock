@@ -14,9 +14,9 @@
     uuid "^3.3.2"
     uws "10.148.1"
 
-"@adamite/sdk@https://github.com/adamitejs/sdk.git":
+"@adamite/sdk@git+https://github.com/adamitejs/sdk.git":
   version "0.1.0"
-  resolved "https://github.com/adamitejs/sdk.git#a6252a4d497d3810e3439e07da9282c09514c6a4"
+  resolved "git+https://github.com/adamitejs/sdk.git#a6252a4d497d3810e3439e07da9282c09514c6a4"
   dependencies:
     "@adamite/relay" "https://github.com/adamitejs/relay.git"
     "@types/jsonwebtoken" "^8.3.2"
