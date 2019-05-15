@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A client for Adamite services.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
     "test": "jest",

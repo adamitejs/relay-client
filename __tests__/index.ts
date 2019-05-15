@@ -1,13 +1,13 @@
 import index from "../src/index";
-import AdamiteClient from "../src/AdamiteClient";
-jest.mock("../src/AdamiteClient");
+import RelayClient from "../src/RelayClient";
+jest.mock("../src/RelayClient");
 
 describe("index", () => {
-  it("should return an AdamiteClient instance", () => {
+  it("should return an RelayClient instance", () => {
     const mockApp = { app: "1234" };
     const mockConfig = { abc: "123" };
     const server = index(mockApp, mockConfig);
-    expect(AdamiteClient).toHaveBeenCalledWith(mockApp, mockConfig);
-    expect(server).toBe((AdamiteClient as any).mock.instances[0]);
+    expect(RelayClient).toHaveBeenCalledWith(mockApp, mockConfig);
+    expect(server).toBe((RelayClient as any).mock.instances[0]);
   });
 });
