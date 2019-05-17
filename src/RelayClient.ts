@@ -1,5 +1,5 @@
 import * as io from "socket.io-client";
-import querystring from "querystring";
+import * as querystring from "querystring";
 import { App, AuthPlugin, AuthUser } from "@adamite/sdk";
 import { RelayClientConfig } from "./RelayTypes";
 
