@@ -1,31 +1,24 @@
 import * as io from "socket.io-client";
 import * as querystring from "querystring";
-import { App, AuthPlugin, AuthUser } from "@adamite/sdk";
 import { RelayClientConfig } from "./RelayTypes";
+import { EventEmitter } from "events";
 
-class RelayClient {
-  public app: App;
-
+class RelayClient extends EventEmitter {
   public config: RelayClientConfig;
 
   public socket: any;
 
-  constructor(app: App, config: RelayClientConfig) {
-    this.app = app;
+  constructor(config: RelayClientConfig) {
+    super();
     this.config = config;
     this.socket = io(this.url);
     this.subscribeToEvents();
   }
 
   get url() {
-    const authPlugin = this.app.plugins["auth"] as AuthPlugin;
-    const currentUser = authPlugin && authPlugin.currentUser;
-    const token = currentUser && currentUser.jwt;
-
     const qs = querystring.stringify({
-      key: this.app.config.apiKey,
-      token,
-      ...(this.app.config.queryString || {})
+      key: this.config.apiKey,
+      token: this.config.jwt
     });
 
     return `${this.config.url}?${qs}`;
@@ -51,27 +44,23 @@ class RelayClient {
     });
   }
 
-  private subscribeToEvents() {
-    if (this.app.plugins.auth) {
-      this.app.auth().onAuthStateChange((authState: AuthUser) => {
-        this.socket.emit("authStateChange", {
-          token: authState ? authState.token : null
-        });
-      });
-    }
+  public updateJwt(jwt: string | undefined) {
+    this.socket.emit("authStateChange", {
+      token: jwt
+    });
+  }
 
+  private subscribeToEvents() {
     this.socket.on("connect", () => {
-      this.app.log(this.config.service, "connected");
+      this.emit("connect");
     });
 
     this.socket.on("disconnect", (r: any) => {
-      this.app.log(this.config.service, "disconnected");
-      console.log(r);
+      this.emit("disconnect", r);
     });
 
     this.socket.on("error", (r: any) => {
-      this.app.log(this.config.service, "error");
-      console.log(r);
+      this.emit("error", r);
     });
   }
 }

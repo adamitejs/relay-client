@@ -1,5 +1,6 @@
 import RelayClient from "./RelayClient";
+import { RelayClientConfig } from "./RelayTypes";
 
-export default function(app: any, config: any) {
-  return new RelayClient(app, config);
+export default function(config: RelayClientConfig) {
+  return new RelayClient(config);
 }
