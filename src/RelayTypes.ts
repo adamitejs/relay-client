@@ -3,4 +3,5 @@ export type RelayClientConfig = {
   service: string;
   apiKey: string;
   jwt?: string;
+  secret?: string;
 };

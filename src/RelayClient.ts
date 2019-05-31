@@ -17,6 +17,7 @@ class RelayClient extends EventEmitter {
 
   get url() {
     const qs = querystring.stringify({
+      secret: this.config.secret,
       key: this.config.apiKey,
       token: this.config.jwt
     });
