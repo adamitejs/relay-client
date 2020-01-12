@@ -25,7 +25,7 @@ class RelayClient extends EventEmitter {
     return `${this.config.url}?${qs}`;
   }
 
-  invoke(name: string, args: any) {
+  invoke(name: string, args: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.socket.emit(
         "command",
@@ -43,6 +43,10 @@ class RelayClient extends EventEmitter {
         }
       );
     });
+  }
+
+  disconnect() {
+    this.socket.disconnect();
   }
 
   public updateJwt(jwt: string | undefined) {
