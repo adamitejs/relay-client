@@ -25,21 +25,21 @@ class RelayClient extends EventEmitter {
     return `${this.config.url}?${qs}`;
   }
 
-  invoke(name: string, args: any): Promise<any> {
+  invoke(name: string, args?: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.socket.emit(
-        "command",
+        "invoke",
         {
           name: `${this.config.service}.${name}`,
           args: args
         },
-        ({ error, ...response }: { error: any }) => {
+        ({ error, returnValue }: { error?: string; returnValue?: any }) => {
           if (error) {
             reject(error);
             return;
           }
 
-          resolve(response);
+          resolve(returnValue);
         }
       );
     });
