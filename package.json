@@ -15,7 +15,8 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "querystring": "^0.2.0",
+    "eventemitter3": "^4.0.0",
+    "query-string": "^6.12.1",
     "socket.io-client": "^2.2.0",
     "uws": "10.148.1"
   },

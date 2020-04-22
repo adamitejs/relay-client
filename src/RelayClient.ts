@@ -1,7 +1,7 @@
 import * as io from "socket.io-client";
-import * as querystring from "querystring";
+import * as querystring from "query-string";
 import { RelayClientConfig } from "./RelayTypes";
-import { EventEmitter } from "events";
+import { EventEmitter } from "eventemitter3";
 
 class RelayClient extends EventEmitter {
   public config: RelayClientConfig;
